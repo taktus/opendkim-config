@@ -27,10 +27,12 @@ Example Playbook
 
 basic usage
 
----
+```
+'''sh
 - hosts: mailserver
   roles:
     - opendkim-config
+```
 
 License
 -------
