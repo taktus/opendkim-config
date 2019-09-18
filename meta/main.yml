@@ -1,6 +1,7 @@
 galaxy_info:
   author: Marek Krasnowski
-  description: 
+  description: configure opendkim package and sets opendkim dauemon to use keyTable and signigTable,  configure postfix to use opendkim milter running on port 8891/tcp
+
   company: Lan Projekt sp z o.o.
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -47,7 +48,6 @@ galaxy_info:
     - name: Ubuntu
       versions:
       - 16.04
-     
      
     # galaxy_tags: []
      
