@@ -7,13 +7,20 @@
   fail: msg="/etc/postfix/main.cf not found! Is postfix installed"
   when: not postfix_config_exists.stat.exists
 
-- name: opendkim packages are installed
+- name: opendkim package is installed
   package:
     name: "{{ item }}"
     state: present
   with_items:
      - opendkim
-     - opendkim-tools
+
+- name: opendkim-tools package is installed
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - opendkim-tools
+  when: ansible_distribution == "Ubuntu"
 
 - name: Create /etc/opendkim folder
   file: 
@@ -21,7 +28,7 @@
     state: directory
     owner: opendkim
     group: opendkim
-    mode: 0755
+    mode: 0700
 
 - name: copy opendkim.conf 
   copy:
@@ -54,12 +61,6 @@
   ignore_errors: true
   register: test_grep_milter
   changed_when: false
-
-- debug: 
-    msg: "{{ test_grep_milter }}"
-    tags:
-      - debug
-      - never
 
 - name: modify smtpd_milters (some milters already defined)
   lineinfile:
