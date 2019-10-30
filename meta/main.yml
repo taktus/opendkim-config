@@ -1,6 +1,8 @@
 galaxy_info:
   author: Marek Krasnowski
-  description: configure opendkim package and sets opendkim dauemon to use keyTable and signigTable,  configure postfix to use opendkim milter running on port 8891/tcp
+  description: |
+    configure opendkim package and sets opendkim dauemon to use keyTable and signigTable,
+    configure postfix to use opendkim milter running on port 8891/tcp
 
   company: Lan Projekt sp z o.o.
 
@@ -15,7 +17,7 @@ galaxy_info:
   # - GPL-3.0-only
   # - Apache-2.0
   # - CC-BY-4.0
-  
+
   license: BSD-3-Clause
 
   min_ansible_version: 2.7
@@ -48,9 +50,9 @@ galaxy_info:
     - name: Ubuntu
       versions:
       - 16.04
-     
+
     # galaxy_tags: []
-     
+
     # List tags for your role here, one per line. A tag is a keyword that describes
     # and categorizes the role. Users find roles by searching for tags. Be sure to
     # remove the '[]' above, if you add tags to this list.
@@ -58,11 +60,11 @@ galaxy_info:
     # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
     #       Maximum 20 tags per role.
 
-  galaxy_tags: 
+  galaxy_tags:
    - openkim
 
   dependencies: []
 
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,
   # if you add dependencies to this list.
-  
+

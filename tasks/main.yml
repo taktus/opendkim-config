@@ -1,5 +1,5 @@
 - name: check for /etc/postfix/main.cf
-  stat: 
+  stat:
     path: /etc/postfix/main.cf
   register: postfix_config_exists
 
@@ -23,27 +23,27 @@
   when: ansible_distribution == "Ubuntu"
 
 - name: Create /etc/opendkim folder
-  file: 
+  file:
     path: /etc/opendkim
     state: directory
     owner: opendkim
     group: opendkim
     mode: 0700
 
-- name: copy opendkim.conf 
+- name: copy opendkim.conf
   copy:
     src: opendkim.conf
     dest: /etc/opendkim.conf
     owner: opendkim
     group: opendkim
     mode: 0644
-    
+
 - name: modify milter_protocol
   lineinfile:
     path: /etc/postfix/main.cf
     line: milter_protocol = 2
     regex: "^\\s*milter_protocol(.*)"
-    
+
 - name: modify milter_default_action
   lineinfile:
     path: /etc/postfix/main.cf
@@ -51,13 +51,13 @@
     regex: "^\\s*milter_default_action(.*)"
 
 - name: Test for line inet:127.0.0.1:8891
-  shell: grep -i 'inet:127.0.0.1:8891' /etc/postfix/main.cf 
+  shell: grep -i 'inet:127.0.0.1:8891' /etc/postfix/main.cf
   ignore_errors: true
   register: test_grep_inet
   changed_when: false
 
 - name: Test for line smtpd_milters
-  shell: grep -i "^smtpd_milters| smtpd_milters" /etc/postfix/main.cf 
+  shell: grep -i "^smtpd_milters| smtpd_milters" /etc/postfix/main.cf
   ignore_errors: true
   register: test_grep_milter
   changed_when: false
@@ -75,7 +75,6 @@
     path: /etc/postfix/main.cf
     line: smtpd_milters = inet:127.0.0.1:8891
   when: (test_grep_inet.stdout == "" and test_grep_milter.stdout == "")
-
 
 - name: modify non_smtpd_milters
   lineinfile:
